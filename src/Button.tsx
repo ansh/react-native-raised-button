@@ -2,6 +2,7 @@ import React, {
   useCallback,
   useMemo,
   useRef,
+  useEffect,
   useState,
   ReactNode,
 } from 'react';
@@ -159,22 +160,33 @@ const AwesomeButton = ({
   const [activity, setActivity] = useState(false);
   const [stateWidth, setStateWidth] = useState<number | null>(null);
 
-  let debouncedPress = useRef( ); 
-  React.useEffect(() => { // update the onPress props when it has changed from parent component
-   
+  let debouncedPress = useRef(
+    debouncedPressTime
+      ? debounce(
+          (animateProgressEnd: (callback?: any) => void) =>
+            onPress(animateProgressEnd),
+          debouncedPressTime,
+          {
+            trailing: false,
+            leading: true,
+          }
+        )
+      : onPress
+  );
+  useEffect(() => {
+    // update the onPress props when it has changed from parent component
     debouncedPress.current = debouncedPressTime
-    ? debounce(
-        (animateProgressEnd: (callback?: any) => void) =>
-        onPress(animateProgressEnd),
-        debouncedPressTime,
-        {
-          trailing: false,
-          leading: true,
-        }
-      )
-    : onPress
-
-   }, [ onPress  ]); 
+      ? debounce(
+          (animateProgressEnd: (callback?: any) => void) =>
+            onPress(animateProgressEnd),
+          debouncedPressTime,
+          {
+            trailing: false,
+            leading: true,
+          }
+        )
+      : onPress;
+  }, [onPress]);
 
   const layout = {
     backgroundActive,
