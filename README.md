@@ -2,7 +2,9 @@
 
 [![Travis](https://img.shields.io/travis/rcaferati/react-native-really-awesome-button/master.svg)](https://travis-ci.org/rcaferati/react-native-really-awesome-button) ![NPM](https://img.shields.io/npm/v/react-native-really-awesome-button.svg)
 
-`react-native-really-awesome-button` is a performant, extendable, production ready React Native component that renders an animated set of 3D UI buttons.
+This button is based on [`react-native-really-awesome-button`](https://github.com/rcaferati/react-native-really-awesome-button) but was forked due to the original library not being maintained and bugs piling up. Shoutout to @rcaferati for developing the original library.
+
+`react-native-raised-button` is a performant, extendable, production ready React Native component that renders an animated set of 3D UI buttons.
 
 | <img width="240" src='https://raw.githubusercontent.com/rcaferati/react-native-really-awesome-button/master/assets/demo-button-blue-new.gif?raw=true' />  | <img width="240" src='https://raw.githubusercontent.com/rcaferati/react-native-really-awesome-button/master/assets/demo-button-rick.gif?raw=true' />  | <img width="240" src='https://raw.githubusercontent.com/rcaferati/react-native-really-awesome-button/master/assets/demo-button-cartman.gif?raw=true' />  |
 |---|---|---|
