@@ -20,7 +20,7 @@ exports[`AwesomeButton should render 1`] = `
   <View
     collapsable={false}
     style={
-      {
+      Object {
         "backgroundColor": "transparent",
         "height": 60,
         "opacity": 0,
@@ -33,7 +33,7 @@ exports[`AwesomeButton should render 1`] = `
     <View
       collapsable={false}
       style={
-        {
+        Object {
           "backgroundColor": "rgba(0, 0, 0, 0.15)",
           "borderBottomLeftRadius": undefined,
           "borderBottomRightRadius": undefined,
@@ -44,8 +44,8 @@ exports[`AwesomeButton should render 1`] = `
           "height": 56,
           "left": "1%",
           "position": "absolute",
-          "transform": [
-            {
+          "transform": Array [
+            Object {
               "translateY": 0,
             },
           ],
@@ -56,13 +56,13 @@ exports[`AwesomeButton should render 1`] = `
     />
     <View
       style={
-        [
-          {
+        Array [
+          Object {
             "bottom": 0,
             "left": 0,
             "position": "absolute",
           },
-          {
+          Object {
             "backgroundColor": "#9f9f9f",
             "borderBottomLeftRadius": undefined,
             "borderBottomRightRadius": undefined,
@@ -79,7 +79,7 @@ exports[`AwesomeButton should render 1`] = `
     <View
       collapsable={false}
       style={
-        {
+        Object {
           "borderBottomLeftRadius": undefined,
           "borderBottomRightRadius": undefined,
           "borderRadius": 4,
@@ -89,8 +89,8 @@ exports[`AwesomeButton should render 1`] = `
           "left": 0,
           "position": "absolute",
           "top": 0,
-          "transform": [
-            {
+          "transform": Array [
+            Object {
               "translateY": 0,
             },
           ],
@@ -102,15 +102,15 @@ exports[`AwesomeButton should render 1`] = `
       <View
         onLayout={[Function]}
         style={
-          [
-            {
+          Array [
+            Object {
               "alignItems": "center",
               "flex": 1,
               "justifyContent": "center",
               "overflow": "hidden",
               "zIndex": 3,
             },
-            {
+            Object {
               "backgroundColor": "#c0c0c0",
               "borderBottomLeftRadius": undefined,
               "borderBottomRightRadius": undefined,
@@ -127,7 +127,7 @@ exports[`AwesomeButton should render 1`] = `
         <View
           collapsable={false}
           style={
-            {
+            Object {
               "backgroundColor": "rgba(0, 0, 0, 0.15)",
               "height": 56,
               "left": 0,
@@ -142,12 +142,12 @@ exports[`AwesomeButton should render 1`] = `
         <View
           onLayout={[Function]}
           style={
-            [
-              {
+            Array [
+              Object {
                 "overflow": "hidden",
                 "width": "55%",
               },
-              {
+              Object {
                 "backgroundColor": "rgba(0, 0, 0, 0.15)",
                 "height": 20,
               },
@@ -157,11 +157,11 @@ exports[`AwesomeButton should render 1`] = `
           <View
             collapsable={false}
             style={
-              {
+              Object {
                 "backgroundColor": "rgba(0,0,0,0.15)",
                 "height": 20,
-                "transform": [
-                  {
+                "transform": Array [
+                  Object {
                     "translateX": -0,
                   },
                 ],
@@ -197,7 +197,7 @@ exports[`AwesomeButton should render a default text children 1`] = `
   <View
     collapsable={false}
     style={
-      {
+      Object {
         "backgroundColor": "transparent",
         "height": 60,
         "opacity": 0,
@@ -210,7 +210,7 @@ exports[`AwesomeButton should render a default text children 1`] = `
     <View
       collapsable={false}
       style={
-        {
+        Object {
           "backgroundColor": "rgba(0, 0, 0, 0.15)",
           "borderBottomLeftRadius": undefined,
           "borderBottomRightRadius": undefined,
@@ -221,8 +221,8 @@ exports[`AwesomeButton should render a default text children 1`] = `
           "height": 56,
           "left": "1%",
           "position": "absolute",
-          "transform": [
-            {
+          "transform": Array [
+            Object {
               "translateY": 0,
             },
           ],
@@ -233,13 +233,13 @@ exports[`AwesomeButton should render a default text children 1`] = `
     />
     <View
       style={
-        [
-          {
+        Array [
+          Object {
             "bottom": 0,
             "left": 0,
             "position": "absolute",
           },
-          {
+          Object {
             "backgroundColor": "#9f9f9f",
             "borderBottomLeftRadius": undefined,
             "borderBottomRightRadius": undefined,
@@ -256,7 +256,7 @@ exports[`AwesomeButton should render a default text children 1`] = `
     <View
       collapsable={false}
       style={
-        {
+        Object {
           "borderBottomLeftRadius": undefined,
           "borderBottomRightRadius": undefined,
           "borderRadius": 4,
@@ -266,8 +266,8 @@ exports[`AwesomeButton should render a default text children 1`] = `
           "left": 0,
           "position": "absolute",
           "top": 0,
-          "transform": [
-            {
+          "transform": Array [
+            Object {
               "translateY": 0,
             },
           ],
@@ -279,15 +279,15 @@ exports[`AwesomeButton should render a default text children 1`] = `
       <View
         onLayout={[Function]}
         style={
-          [
-            {
+          Array [
+            Object {
               "alignItems": "center",
               "flex": 1,
               "justifyContent": "center",
               "overflow": "hidden",
               "zIndex": 3,
             },
-            {
+            Object {
               "backgroundColor": "#c0c0c0",
               "borderBottomLeftRadius": undefined,
               "borderBottomRightRadius": undefined,
@@ -304,7 +304,7 @@ exports[`AwesomeButton should render a default text children 1`] = `
         <View
           collapsable={false}
           style={
-            {
+            Object {
               "backgroundColor": "rgba(0, 0, 0, 0.15)",
               "height": 56,
               "left": 0,
@@ -319,7 +319,7 @@ exports[`AwesomeButton should render a default text children 1`] = `
         <View
           collapsable={false}
           style={
-            {
+            Object {
               "alignItems": "center",
               "flex": 1,
               "flexDirection": "row",
@@ -328,8 +328,8 @@ exports[`AwesomeButton should render a default text children 1`] = `
               "paddingBottom": 0,
               "paddingHorizontal": 16,
               "paddingTop": 0,
-              "transform": [
-                {
+              "transform": Array [
+                Object {
                   "scale": 1,
                 },
               ],
@@ -338,13 +338,13 @@ exports[`AwesomeButton should render a default text children 1`] = `
         >
           <Text
             style={
-              [
-                {
+              Array [
+                Object {
                   "fontWeight": "bold",
                   "textAlign": "center",
                   "zIndex": 10,
                 },
-                {
+                Object {
                   "color": "#FFFFFF",
                   "fontFamily": undefined,
                   "fontSize": 14,
