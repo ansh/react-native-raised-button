@@ -40,7 +40,9 @@ function Themed({
   const styles: any = disabled ? theme.buttons.disabled : theme.buttons[type];
   const sizeObj: any = size ? theme.size[size] : {};
 
-  return <AwesomeButton {...styles} {...sizeObj} disabled={disabled} {...extra} />;
+  return (
+    <AwesomeButton {...styles} {...sizeObj} disabled={disabled} {...extra} />
+  );
 }
 
 export default Themed;

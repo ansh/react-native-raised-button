@@ -69,7 +69,7 @@
     "lodash.debounce": "^4.0.8",
     "pod-install": "^0.1.0",
     "prettier": "^2.0.5",
-    "react":"18.1.0",
+    "react": "18.1.0",
     "react-native": "0.70.5",
     "react-native-builder-bob": "^0.20.0",
     "react-native-owl": "^1.1.1",
@@ -121,8 +121,10 @@
       "prettier"
     ],
     "rules": {
+      "no-unused-vars": 0,
+      "@typescript-eslint/no-unused-vars": 0,
       "prettier/prettier": [
-        "error",
+        "warn",
         {
           "quoteProps": "consistent",
           "singleQuote": true,

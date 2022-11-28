@@ -17,7 +17,7 @@ export default function Progress({ navigation }: any) {
       },
       headerTintColor: '#FFF',
     });
-  }, []);
+  }, [navigation]);
 
   return (
     <Container>

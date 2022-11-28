@@ -186,65 +186,68 @@ const AwesomeButton = ({
           }
         )
       : onPress;
-  }, [onPress]);
+  }, [onPress, debouncedPressTime]);
 
-  const layout = {
-    backgroundActive,
-    backgroundColor,
-    backgroundDarker,
-    backgroundPlaceholder,
-    backgroundProgress,
-    backgroundShadow,
-    borderColor,
-    borderRadius,
-    borderBottomLeftRadius,
-    borderBottomRightRadius,
-    borderTopLeftRadius,
-    borderTopRightRadius,
-    borderWidth,
-    height,
-    paddingBottom,
-    paddingHorizontal,
-    paddingTop,
-    raiseLevel,
-    stateWidth,
-    stretch,
-    textColor,
-    textFontFamily,
-    textLineHeight,
-    textSize,
-    width,
-  };
+  const layout = useMemo(
+    () => ({
+      backgroundActive,
+      backgroundColor,
+      backgroundDarker,
+      backgroundPlaceholder,
+      backgroundProgress,
+      backgroundShadow,
+      borderColor,
+      borderRadius,
+      borderBottomLeftRadius,
+      borderBottomRightRadius,
+      borderTopLeftRadius,
+      borderTopRightRadius,
+      borderWidth,
+      height,
+      paddingBottom,
+      paddingHorizontal,
+      paddingTop,
+      raiseLevel,
+      stateWidth,
+      stretch,
+      textColor,
+      textFontFamily,
+      textLineHeight,
+      textSize,
+      width,
+    }),
+    [
+      backgroundActive,
+      backgroundColor,
+      backgroundDarker,
+      backgroundPlaceholder,
+      backgroundProgress,
+      backgroundShadow,
+      borderColor,
+      borderRadius,
+      borderBottomLeftRadius,
+      borderBottomRightRadius,
+      borderTopLeftRadius,
+      borderTopRightRadius,
+      borderWidth,
+      height,
+      paddingBottom,
+      paddingHorizontal,
+      paddingTop,
+      raiseLevel,
+      stateWidth,
+      stretch,
+      textColor,
+      textFontFamily,
+      textLineHeight,
+      textSize,
+      width,
+    ]
+  );
 
   const dynamicStyles: any = useMemo(() => {
     return getStyles(layout);
-  }, [
-    backgroundActive,
-    backgroundColor,
-    backgroundDarker,
-    backgroundPlaceholder,
-    backgroundProgress,
-    backgroundShadow,
-    borderColor,
-    borderRadius,
-    borderBottomLeftRadius,
-    borderBottomRightRadius,
-    borderTopLeftRadius,
-    borderTopRightRadius,
-    borderWidth,
-    height,
-    paddingBottom,
-    paddingHorizontal,
-    paddingTop,
-    raiseLevel,
-    stateWidth,
-    stretch,
-    textColor,
-    textFontFamily,
-    textLineHeight,
-    textSize,
-    width,
-  ]);
+  }, [layout]);
 
   const getAnimatedValues = () => {
     let width = containerWidth.current ? containerWidth.current * -1 : 0;
@@ -340,18 +343,25 @@ const AwesomeButton = ({
 
       onPressedIn && onPressedIn();
     });
-  }, []);
+  }, [
+    animatedActive,
+    animatedOpacity,
+    animatedValue,
+    onPressedIn,
+    progress,
+    activeOpacity,
+  ]);
 
-  const animateLoadingStart = () => {
+  const animateLoadingStart = useCallback(() => {
     animatedLoading.setValue(0);
     animateTiming({
       variable: animatedLoading,
       toValue: 1,
       duration: progressLoadingTime,
     }).start();
-  };
+  }, [animatedLoading, progressLoadingTime]);
 
-  const animateContentOut = () => {
+  const animateContentOut = useCallback(() => {
     Animated.parallel([
       animateTiming({
         variable: loadingOpacity,
@@ -366,107 +376,127 @@ const AwesomeButton = ({
         toValue: 1,
       }),
     ]).start();
-  };
+  }, [activityOpacity, loadingOpacity, textOpacity]);
 
-  const animateProgressEnd = (callback: any) => {
-    if (progress !== true) {
-      return;
-    }
+  const animateRelease = useCallback(
+    (callback?: any) => {
+      if (pressAnimation.current) {
+        pressAnimation.current.stop();
+      }
 
-    if (timeout?.current) {
-      clearTimeout(timeout.current);
-    }
+      pressed.current = false;
+      pressing.current = false;
 
-    requestAnimationFrame(() => {
-      animateTiming({
-        variable: animatedLoading,
-        toValue: 1,
-      }).start(() => {
+      const end = () => {
+        pressed.current = false;
+        pressing.current = false;
+        callback && callback();
+        onPressedOut && onPressedOut();
+      };
+
+      if (springRelease === true) {
         Animated.parallel([
-          animateElastic({
-            variable: textOpacity,
-            toValue: 1,
+          animateSpring({
+            variable: animatedActive,
+            toValue: 0,
           }),
-          animateElastic({
-            variable: activityOpacity,
+          animateSpring({
+            variable: animatedValue,
             toValue: 0,
           }),
           animateTiming({
-            variable: loadingOpacity,
-            toValue: 0,
-            delay: 100,
+            variable: animatedOpacity,
+            toValue: 1,
           }),
-        ]).start(() => {
-          animateRelease(() => {
-            progressing.current = false;
-            callback && callback();
-            onProgressEnd && onProgressEnd();
-          });
-        });
-      });
-    });
-  };
+        ]).start(end);
+        return;
+      }
 
-  const animateRelease = (callback?: any) => {
-    if (pressAnimation.current) {
-      pressAnimation.current.stop();
-    }
-
-    pressed.current = false;
-    pressing.current = false;
-
-    const end = () => {
-      pressed.current = false;
-      pressing.current = false;
-      callback && callback();
-      onPressedOut && onPressedOut();
-    };
-
-    if (springRelease === true) {
       Animated.parallel([
-        animateSpring({
+        animateTiming({
           variable: animatedActive,
           toValue: 0,
+          duration: ANIMATED_TIMING_OFF,
         }),
-        animateSpring({
+        animateTiming({
           variable: animatedValue,
           toValue: 0,
+          duration: ANIMATED_TIMING_OFF,
         }),
         animateTiming({
           variable: animatedOpacity,
           toValue: 1,
         }),
       ]).start(end);
-      return;
-    }
+    },
+    [
+      animatedActive,
+      animatedOpacity,
+      animatedValue,
+      onPressedOut,
+      springRelease,
+    ]
+  );
 
-    Animated.parallel([
-      animateTiming({
-        variable: animatedActive,
-        toValue: 0,
-        duration: ANIMATED_TIMING_OFF,
-      }),
-      animateTiming({
-        variable: animatedValue,
-        toValue: 0,
-        duration: ANIMATED_TIMING_OFF,
-      }),
-      animateTiming({
-        variable: animatedOpacity,
-        toValue: 1,
-      }),
-    ]).start(end);
-  };
+  const animateProgressEnd = useCallback(
+    (callback: any) => {
+      if (progress !== true) {
+        return;
+      }
 
-  const startProgress = () => {
+      if (timeout?.current) {
+        clearTimeout(timeout.current);
+      }
+
+      requestAnimationFrame(() => {
+        animateTiming({
+          variable: animatedLoading,
+          toValue: 1,
+        }).start(() => {
+          Animated.parallel([
+            animateElastic({
+              variable: textOpacity,
+              toValue: 1,
+            }),
+            animateElastic({
+              variable: activityOpacity,
+              toValue: 0,
+            }),
+            animateTiming({
+              variable: loadingOpacity,
+              toValue: 0,
+              delay: 100,
+            }),
+          ]).start(() => {
+            animateRelease(() => {
+              progressing.current = false;
+              callback && callback();
+              onProgressEnd && onProgressEnd();
+            });
+          });
+        });
+      });
+    },
+    [
+      activityOpacity,
+      animateRelease,
+      animatedLoading,
+      loadingOpacity,
+      onProgressEnd,
+      progress,
+      textOpacity,
+    ]
+  );
+
+  const startProgress = useCallback(() => {
     progressing.current = true;
     onProgressStart && onProgressStart();
     setActivity(true);
     animateLoadingStart();
     animateContentOut();
-  };
+  }, [animateContentOut, animateLoadingStart, onProgressStart]);
 
-  const press = () => {
+  const press = useCallback(() => {
     actioned.current = true;
     if (progressing.current === true) {
       return;
@@ -477,7 +507,7 @@ const AwesomeButton = ({
     }
 
     debouncedPress.current(animateProgressEnd);
-  };
+  }, [animateProgressEnd, progress, startProgress]);
 
   const handlePressIn = useCallback(
     (event: GestureResponderEvent) => {
@@ -493,7 +523,7 @@ const AwesomeButton = ({
       onPressIn && onPressIn(event);
       animatePressIn();
     },
-    [disabled, children, onPressIn]
+    [disabled, children, onPressIn, animatePressIn]
   );
 
   const handlePressOut = useCallback(
@@ -520,7 +550,15 @@ const AwesomeButton = ({
 
       animateRelease();
     },
-    [raiseLevel, children, progress, onPress]
+    [
+      raiseLevel,
+      children,
+      progress,
+      animateRelease,
+      disabled,
+      onPressOut,
+      press,
+    ]
   );
 
   const animatedValues = getAnimatedValues();
@@ -548,7 +586,13 @@ const AwesomeButton = ({
         </Animated.View>
       </>
     );
-  }, [activity]);
+  }, [
+    activity,
+    activityColor,
+    animatedValues.animatedActivity,
+    animatedValues.animatedProgress,
+    dynamicStyles.progress,
+  ]);
 
   const renderContent = useMemo(() => {
     const animatedStyles = {
@@ -595,7 +639,16 @@ const AwesomeButton = ({
         {after}
       </Animated.View>
     );
-  }, [children, before, after, textColor]);
+  }, [
+    children,
+    before,
+    after,
+    animatedPlaceholder,
+    dynamicStyles.container__placeholder,
+    dynamicStyles.container__text,
+    dynamicStyles.container__view,
+    textOpacity,
+  ]);
 
   return (
     <Pressable

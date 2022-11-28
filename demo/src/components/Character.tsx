@@ -80,11 +80,7 @@ const Character = ({ char = 'rick' }) => {
   const image: any = characters[char];
   const animatedValue = useRef(new Animated.Value(0)).current;
 
-  if (!image) {
-    return null;
-  }
-
-  const animateCharacter = () => {
+  const animateCharacter = useCallback(() => {
     Animated.spring(animatedValue, {
       toValue: 1,
       delay: 185,
@@ -92,11 +88,15 @@ const Character = ({ char = 'rick' }) => {
       friction: 6.75,
       useNativeDriver: true,
     }).start();
-  };
+  }, [animatedValue]);
 
   useEffect(() => {
     animateCharacter();
-  }, []);
+  }, [animateCharacter]);
+
+  if (!image) {
+    return null;
+  }
 
   return (
     <Animated.View

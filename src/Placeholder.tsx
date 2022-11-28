@@ -16,7 +16,7 @@ const Placeholder = ({ animated, style }: any) => {
         toValue: 1,
       });
     }
-  }, [width]);
+  }, [width, animated, animatedValue]);
 
   return (
     <View

@@ -5,7 +5,7 @@ import SocialTypes from './social';
 
 const primary = '#C77CB4';
 const secondary = '#E6913E';
-const anchor = "#FFF";
+const anchor = '#FFF';
 const beth = '#E36F5E';
 
 const COMMON: ButtonTypes = {
