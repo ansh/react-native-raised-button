@@ -1,6 +1,6 @@
 {
-  "name": "react-native-really-awesome-button-example",
-  "description": "Example app for react-native-really-awesome-button",
+  "name": "react-native-raised-button-example",
+  "description": "Example app for react-native-raised-button",
   "version": "0.0.1",
   "private": true,
   "main": "index",
